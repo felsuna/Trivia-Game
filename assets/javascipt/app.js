@@ -10,7 +10,7 @@ var triviaQuestions = [
         choice2: "Acorns",
         choice3: "Candy",
         choice4: "Sushi",
-        rightAnswer: "choice3",
+        rightAnswer: "Candy",
     },
     {
         question: "What gift did Totoro give to Satsuki and Mei?",
@@ -69,7 +69,7 @@ var triviaQuestions = [
         rightAnswer: "choice3",
     },
 ];
-for (var i = 0; i<triviaQuestions.length; i++){
+for (var i = 0; i < triviaQuestions.length; i++) {
     var newQuestion = $('<h2>');
     newQuestion.text(triviaQuestions[i].question);
     var choiceContainer = $("<div>");
@@ -78,7 +78,7 @@ for (var i = 0; i<triviaQuestions.length; i++){
     choice1.attr('value', triviaQuestions[i].choice1);
     choiceContainer.append(choice1);
     choiceContainer.append(triviaQuestions[i].choice1);
-   
+
     var choice2 = $('<input type="radio">');
     choice2.attr('name', 'q' + (i + 1));
     choice2.attr('value', triviaQuestions[i].choice2);
@@ -102,9 +102,7 @@ for (var i = 0; i<triviaQuestions.length; i++){
     choiceContainer.append(triviaQuestions[i].choice4);
     $('#questions').append(newQuestion);
     $('#questions').append(choiceContainer);
-   
 }
-
 $("#start-button").text("Start");
 $("#timer").hide();
 $('#questions').hide()
@@ -120,21 +118,37 @@ $("#start-button").on("click", function () {
     $('#timer').show();
     $('#done-button').show();
     $('#questions').show();
-    var time = 10;
+    var time = 30;
     $("#timer").text(time);
-    var gameTimer = setInterval(function(){
+    var gameTimer = setInterval(function () {
         time--
         $("#timer").text(time);
-        if (time === 0){
+        if (time === 0) {
             clearInterval(gameTimer);
-            setTimeout(function(){
-                console.log("Game over")
-            },1)            
+            setTimeout(function () {
+                $("#start-button").text("Start").hide();
+                $("#timer").hide();
+                $('#questions').hide()
+                $("#done-button").text("Done").hide();
+                $("#all-done").text("All done!").show();
+                $("#correct-answers").text("Correct: " + correct).show();
+                $("#incorrect-answers").text("Incorrect: " + incorrect).show();
+                $("#unanswered").text("Unanswered: " + unanswered).show();
+                console.log("Time's up")
+            }, 1)
         }
-    },1000)
+    }, 1000)
 })
 
 $("#done-button").on("click", function () {
+    $("#start-button").text("Start").hide();
+    $("#timer").hide();
+    $('#questions').hide()
+    $("#done-button").text("Done").hide();
+    $("#all-done").text("All done!").show();
+
+    $("#unanswered").text("Unanswered: " + unanswered).show();
+
     var q1 = $('input[name="q1"]:checked').val();
     var q2 = $('input[name="q2"]:checked').val();
     var q3 = $('input[name="q3"]:checked').val();
@@ -144,4 +158,23 @@ $("#done-button").on("click", function () {
     var q7 = $('input[name="q7"]:checked').val();
     var q8 = $('input[name="q8"]:checked').val();
     console.log(q1, q2, q3, q4, q5, q6, q7, q8);
+
+    if (q1 === triviaQuestions[0].rightAnswer) {
+        correct++;
+    }
+    else {
+        incorrect++;
+    }
+
+    $("#correct-answers").text("Correct: " + correct).show();
+    $("#incorrect-answers").text("Incorrect: " + incorrect).show();
+
 })
+
+// if i want to do a  loop thought my right answers vs what was picked
+// for (var i = 0; i<triviaQuestions; i++) {
+
+//}else if { 
+    //answers[i] = triviaQuestions[i].rightAnswer
+
+//} 
