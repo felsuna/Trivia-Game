@@ -146,9 +146,7 @@ $("#done-button").on("click", function () {
     $('#questions').hide()
     $("#done-button").text("Done").hide();
     $("#all-done").text("All done!").show();
-
     $("#unanswered").text("Unanswered: " + unanswered).show();
-
 
     var q1 = $('input[name="q1"]:checked').val();
     var q2 = $('input[name="q2"]:checked').val();
@@ -160,11 +158,17 @@ $("#done-button").on("click", function () {
     var q8 = $('input[name="q8"]:checked').val();
     console.log(q1, q2, q3, q4, q5, q6, q7, q8);
 
-    if (q1 === triviaQuestions[0].rightAnswer) {
-        correct++;
-    }
-    else {
-        incorrect++;
+    var selectedAnswer = [q1,q2,q3,q4,q5,q6,q7,q8]
+
+    for (var i = 0; i < triviaQuestions.length; i++) {
+        var correctAnswers = triviaQuestions[i].rightAnswer;
+
+        if (selectedAnswer[i] === correctAnswers) {
+            correct++;
+        }
+        else {
+            incorrect++;
+        }
     }
 
     $("#correct-answers").text("Correct: " + correct).show();
