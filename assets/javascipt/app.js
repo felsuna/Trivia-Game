@@ -1,8 +1,6 @@
 
 var correct = 0;
 var incorrect = 0;
-var unanswered = 0;
-
 var triviaQuestions = [
     {
         question: "In Spirited Away, what do soot sprites love to eat?",
@@ -53,7 +51,7 @@ var triviaQuestions = [
         rightAnswer: "Gigi",
     },
     {
-        question: "In Nausicaä of the Valley of the Wind, what was mainly responsible for the creation of the Toxic Jungle and the Seven Days of Fire?",
+        question: "In Nausicaä of the Valley of the Wind, what was mainly responsible for the creation of the Toxic Jungle?",
         choice1: "Asbel",
         choice2: "Ohms",
         choice3: "Princess Kushana",
@@ -69,10 +67,17 @@ var triviaQuestions = [
         rightAnswer: "Fish crackers",
     },
 ];
+
+function listQuestions(){
+    $('#questions').append(newQuestion);
+    $('#questions').append(choiceContainer);
+}
+
 for (var i = 0; i < triviaQuestions.length; i++) {
     var newQuestion = $('<h2>');
     newQuestion.text(triviaQuestions[i].question);
     var choiceContainer = $("<div>");
+
     var choice1 = $('<input type="radio">');
     choice1.attr('name', 'q' + (i + 1));
     choice1.attr('value', triviaQuestions[i].choice1);
@@ -84,25 +89,23 @@ for (var i = 0; i < triviaQuestions.length; i++) {
     choice2.attr('value', triviaQuestions[i].choice2);
     choiceContainer.append(choice2);
     choiceContainer.append(triviaQuestions[i].choice2);
-    $('#questions').append(newQuestion);
-    $('#questions').append(choiceContainer);
+    listQuestions();
 
     var choice3 = $('<input type="radio">');
     choice3.attr('name', 'q' + (i + 1));
     choice3.attr('value', triviaQuestions[i].choice3);
     choiceContainer.append(choice3);
     choiceContainer.append(triviaQuestions[i].choice3);
-    $('#questions').append(newQuestion);
-    $('#questions').append(choiceContainer);
+    listQuestions();
 
     var choice4 = $('<input type="radio">');
     choice4.attr('name', 'q' + (i + 1));
     choice4.attr('value', triviaQuestions[i].choice4);
     choiceContainer.append(choice4);
     choiceContainer.append(triviaQuestions[i].choice4);
-    $('#questions').append(newQuestion);
-    $('#questions').append(choiceContainer);
+    listQuestions()
 }
+
 $("#start-button").text("Start");
 $("#timer").hide();
 $('#questions').hide()
@@ -110,19 +113,17 @@ $("#done-button").text("Done").hide();
 $("#all-done").text("All done!").hide();
 $("#correct-answers").text("Correct: " + correct).hide();
 $("#incorrect-answers").text("Incorrect: " + incorrect).hide();
-$("#unanswered").text("Unanswered: " + unanswered).hide();
 
 $("#start-button").on("click", function () {
-    var startButton = $('<button>');
-    console.log("Start button");
+    $("#start-button").hide();
     $('#timer').show();
     $('#done-button').show();
     $('#questions').show();
     var time = 30;
-    $("#timer").text(time);
+    $("#timer").text("Time remaining: " + time);
     var gameTimer = setInterval(function () {
         time--
-        $("#timer").text(time);
+        $("#timer").text("Time remaining: " + time);
         if (time === 0) {
             clearInterval(gameTimer);
             setTimeout(function () {
@@ -133,7 +134,6 @@ $("#start-button").on("click", function () {
                 $("#all-done").text("All done!").show();
                 $("#correct-answers").text("Correct: " + correct).show();
                 $("#incorrect-answers").text("Incorrect: " + incorrect).show();
-                $("#unanswered").text("Unanswered: " + unanswered).show();
                 console.log("Time's up")
             }, 1)
         }
@@ -146,8 +146,7 @@ $("#done-button").on("click", function () {
     $('#questions').hide()
     $("#done-button").text("Done").hide();
     $("#all-done").text("All done!").show();
-    $("#unanswered").text("Unanswered: " + unanswered).show();
-
+    
     var q1 = $('input[name="q1"]:checked').val();
     var q2 = $('input[name="q2"]:checked').val();
     var q3 = $('input[name="q3"]:checked').val();
@@ -156,9 +155,8 @@ $("#done-button").on("click", function () {
     var q6 = $('input[name="q6"]:checked').val();
     var q7 = $('input[name="q7"]:checked').val();
     var q8 = $('input[name="q8"]:checked').val();
-    console.log(q1, q2, q3, q4, q5, q6, q7, q8);
-
-    var selectedAnswer = [q1,q2,q3,q4,q5,q6,q7,q8]
+   
+    var selectedAnswer = [q1,q2,q3,q4,q5,q6,q7,q8];
 
     for (var i = 0; i < triviaQuestions.length; i++) {
         var correctAnswers = triviaQuestions[i].rightAnswer;
@@ -168,18 +166,10 @@ $("#done-button").on("click", function () {
         }
         else {
             incorrect++;
-        }
+        }     
     }
-
+    
     $("#correct-answers").text("Correct: " + correct).show();
     $("#incorrect-answers").text("Incorrect: " + incorrect).show();
 
 })
-
-// if i want to do a  loop thought my right answers vs what was picked
-// for (var i = 0; i<triviaQuestions; i++) {
-
-//}else if { 
-    //answers[i] = triviaQuestions[i].rightAnswer
-
-//} 
