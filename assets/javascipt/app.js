@@ -18,7 +18,7 @@ var triviaQuestions = [
         choice2: "Toys",
         choice3: "White Cat",
         choice4: "Red Umbrella",
-        rightAnswer: "choice1",
+        rightAnswer: "Nuts and seeds",
     },
     {
         question: "In Howl's Moving Castle, who had Howl's heart?",
@@ -26,7 +26,7 @@ var triviaQuestions = [
         choice2: "Sophie",
         choice3: "Turnip head",
         choice4: "Calcipher",
-        rightAnswer: "choice4",
+        rightAnswer: "Calcipher",
     },
     {
         question: "What mystical creature did Ashitaka see in the lurking in the trees?",
@@ -34,7 +34,7 @@ var triviaQuestions = [
         choice2: "Glowing Owl",
         choice3: "Kodama",
         choice4: "Fairies",
-        rightAnswer: "choice2",
+        rightAnswer: "Kodama",
     },
     {
         question: "What is the name of the boy who found Ponyo?",
@@ -42,7 +42,7 @@ var triviaQuestions = [
         choice2: "Kōichi",
         choice3: "Granmamare",
         choice4: "Fujimoto",
-        rightAnswer: "choice1",
+        rightAnswer: "Sōsuke",
     },
     {
         question: "What is the name of the black cat in Kiki's Delivery Service?",
@@ -50,7 +50,7 @@ var triviaQuestions = [
         choice2: "Gigi",
         choice3: "Teto",
         choice4: "Hin",
-        rightAnswer: "choice2",
+        rightAnswer: "Gigi",
     },
     {
         question: "In Nausicaä of the Valley of the Wind, what was mainly responsible for the creation of the Toxic Jungle and the Seven Days of Fire?",
@@ -58,7 +58,7 @@ var triviaQuestions = [
         choice2: "Ohms",
         choice3: "Princess Kushana",
         choice4: "Giant Warriors",
-        rightAnswer: "choice4",
+        rightAnswer: "Giant Warriors",
     },
     {
         question: "In The Cat Returns, what did Haru share with Yuki so she wouldnt starve?",
@@ -66,7 +66,7 @@ var triviaQuestions = [
         choice2: "Strawberry cake",
         choice3: "Fish crackers",
         choice4: "Curry and rice",
-        rightAnswer: "choice3",
+        rightAnswer: "Fish crackers",
     },
 ];
 for (var i = 0; i < triviaQuestions.length; i++) {
@@ -148,6 +148,7 @@ $("#done-button").on("click", function () {
     $("#all-done").text("All done!").show();
 
     $("#unanswered").text("Unanswered: " + unanswered).show();
+
 
     var q1 = $('input[name="q1"]:checked').val();
     var q2 = $('input[name="q2"]:checked').val();
