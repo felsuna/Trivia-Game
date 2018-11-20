@@ -6,13 +6,10 @@ h2 {
     color:red
 }
 
-body, html {
+body {
     height: 100%;
     margin: 0;
-}
-
-.bg {
-    /* The image used */
+    padding: 0;
     background-image: url("https://wallpaperaccess.com/full/42622.jpg");
 
     /* Full height */
